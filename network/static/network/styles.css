@@ -34,3 +34,72 @@
     margin: 0;
     line-height: .5;
 }
+
+/*external code for layout*/
+.body{
+    margin: 0;
+}
+
+.ma1n{
+padding: 0;
+margin: 0;
+}
+
+/*This is side navbar*/
+.side123{
+    width: 200px;
+    height: 100vh;
+    background-color: #34495e;
+    color: white;
+    position: fixed;
+    margin-top: 48px;
+}
+.sideul{
+    padding: 0;
+    list-style: none;
+}
+.sideli{
+margin-top: 10px;
+font-size: 1.3rem;
+padding-left: 30px;
+margin-bottom: 20px;
+width: 85%;
+transition: text-shadow 0.3s ease, color 0.3s ease;
+}
+.sideli:hover{
+    text-shadow: 0 0 10px #fbfcfc, 0 0 20px #fbfcfc, 0 0 30px #fbfcfc, 0 0 40px #fbfcfc;
+    color: #fbfcfc;
+}
+/*This is top navbar*/
+.side12a{
+    background-color: #34495e;
+    height: 6vh;
+    width: 100%;
+    padding-bottom: 10px;
+    position: fixed;
+
+}
+.side12a div{
+    display: inline;
+}
+.sidehead{
+    color: white;
+    font-size: 25px;
+    position: fixed;
+    top: 20px;
+    left: 90%;
+    text-shadow: 0 0 10px #fbfcfc, 0 0 20px #fbfcfc, 0 0 30px #fbfcfc, 0 0 40px #fbfcfc;
+  
+}
+.sideprofile{
+    font-size: 1.5rem;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+.profile{
+    margin-left: 10px;
+    margin-top: 10px;
+    font: 1.6rem sans-serif;
+    text-shadow: 0 0 10px #fbfcfc, 0 0 20px #fbfcfc, 0 0 30px #fbfcfc, 0 0 40px #fbfcfc;
+}
+

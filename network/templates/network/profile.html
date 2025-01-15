@@ -10,7 +10,7 @@
         {% if user.isauthenticated %}
             {% if user != user_profile %}
                 {% if isFollowing%}
-                    <form action="{% url 'unfollow'%}" method="post">
+                    <form action="{% url 'unfollow'%}" method="post"> 
                         {% csrf_token %}
                         <input type="hidden" name="userfollow" value="{{user_profile}}">
                         <button type="submit" class="btn btn-danger">Unfollow</button>          
