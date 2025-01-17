@@ -5,7 +5,7 @@ Default page of web app is all post page this page shows the post made by all us
 
 ![image](https://github.com/user-attachments/assets/0fd6fff1-596d-4874-9d7e-e9c38b860398)
 
-after clicking on user name inside post
+### after clicking on user name inside post
 
 ![image](https://github.com/user-attachments/assets/491b3423-dd9e-4737-aa0c-d75f0927e841)
 ## Profile page
@@ -43,4 +43,20 @@ This page makes the user to create new account
 
 ![image](https://github.com/user-attachments/assets/e1808843-2d28-4abf-8980-b51e8ce7c845)
 
-Code distribution by Harvard university:-https://cs50.harvard.edu/web/2020/projects/4/network/
+## Database info
+The backend data base is show in form of django development server that consist of different django model that is use to store information. These data models name include Followers,Like,Post, user
+![image](https://github.com/user-attachments/assets/5e8c4233-ba2a-47ee-8f70-3460d5c6cc04)
+### User model
+store information about username, password , date of login etc
+![image](https://github.com/user-attachments/assets/35476e0e-d774-48e8-a30f-c56dad99179e)
+### Follows model
+this consist information about who is following whom
+![image](https://github.com/user-attachments/assets/f4b3e040-aaeb-4cf4-bfb0-f2c97b8fd165)
+### Like model
+this consist of information about who had liked whose post
+![image](https://github.com/user-attachments/assets/3c7677a2-ecab-40f7-9497-c3990040a79b)
+### Post
+information about post done by all user
+![image](https://github.com/user-attachments/assets/9be88d19-1af1-4a4c-9c40-834f11754878)
+
+### Thank You 😊
