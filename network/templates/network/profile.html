@@ -1,15 +1,50 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
+<div class="ma2n">
+    <div class="side12b">
+        <div class="side2profile">
+            <i class="fa-solid fa-user-secret"></i>
+        </div>
+        <div class="side2profile12">
+            <div>{{username}}</div> 
+        </div>
+        <span>
+            {% if user.is_authenticated %}
+            {% if user != user_profile %}
+                {% if isFollowing %}
+                    <form action="{% url 'unfollow'%}" method="post"> 
+                        {% csrf_token %}
+                        <input type="hidden" name="userfollow" value="{{user_profile}}">
+                        <button type="submit" class="btn btn-danger fobut">Unfollow</button>          
+                      </form>
+                {% else %}
+                    <form action="{% url 'follow'%}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="userfollow" value="{{user_profile}}">
+                        <button type="submit" class="btn btn-primary fobut">Follow</button>      
+                                  </form>
+                {% endif %}
+            {% endif %}
+            {% endif %}
+        </span>
+        <div class="fo">
+            <div class="fo1">Followers: {{followers.count}}</div>
+            <div class="fo2">Following: {{following.count}}</div>
+        </div>
+    </div>
+</div>
+
+{% comment %}
 <div class="main">
 <h1>{{username}}</h1>
 <div class="container">
     <div class="row d-file justify-content-center">
         <h3 class="col-4">Followers:{{followers.count}} </h3>
         <h3 class="col-4">Following:{{following.count}} </h3>
-        {% if user.isauthenticated %}
+        {% if user.is_authenticated %}
             {% if user != user_profile %}
-                {% if isFollowing%}
+                {% if isFollowing %}
                     <form action="{% url 'unfollow'%}" method="post"> 
                         {% csrf_token %}
                         <input type="hidden" name="userfollow" value="{{user_profile}}">
@@ -23,10 +58,11 @@
                                   </form>
                 {% endif %}
             {% endif %}
-        {% endif %}
+            {% endif %}
+
     </div>
 </div>
-
+{% endcomment%}
 
     {% for post in posts_of_the_page %}
     <div class="mainbox2">

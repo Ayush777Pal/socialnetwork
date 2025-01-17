@@ -1,58 +1,27 @@
-.main{
-    margin-left: 30px;
-    padding: 0;
-}
-
-/*box for post*/
-.mainbox{
-    margin-top:50px;
-    margin-left: 40px;
-    margin-bottom: 60px;
-    border: 2px solid black;
-    height:33vh;
-    padding: 20px;
-    width: 180vh;
-}
-
-.maintextbox{
-    width: 100%;
-    height: 50%;
-}
-
-/*box for post posted*/
-.mainbox2{
-    margin-top:20px;
-    margin-left: 40px;
-    border: 1px solid black;
-    height:auto;
-    padding: 20px;
-    width: 180vh;
-  
-}
-.username,.content, .date{
-    padding: 0;
-    margin: 0;
-    line-height: .5;
-}
-
-/*external code for layout*/
 .body{
     margin: 0;
+}
+.sideul .sideli a{
+    text-decoration: none;
+    color: white;
 }
 
 .ma1n{
 padding: 0;
 margin: 0;
 }
-
+.main{
+    padding-left: 10px;
+}
 /*This is side navbar*/
 .side123{
+    padding-top: 25px;
     width: 200px;
     height: 100vh;
     background-color: #34495e;
     color: white;
     position: fixed;
-    margin-top: 48px;
+    top: 38px;
 }
 .sideul{
     padding: 0;
@@ -73,10 +42,12 @@ transition: text-shadow 0.3s ease, color 0.3s ease;
 /*This is top navbar*/
 .side12a{
     background-color: #34495e;
-    height: 6vh;
+    height: 8vh;
     width: 100%;
     padding-bottom: 10px;
     position: fixed;
+    top: 0;
+    z-index: 1;
 
 }
 .side12a div{
@@ -86,7 +57,7 @@ transition: text-shadow 0.3s ease, color 0.3s ease;
     color: white;
     font-size: 25px;
     position: fixed;
-    top: 20px;
+    top: 10px;
     left: 90%;
     text-shadow: 0 0 10px #fbfcfc, 0 0 20px #fbfcfc, 0 0 30px #fbfcfc, 0 0 40px #fbfcfc;
   
@@ -102,4 +73,104 @@ transition: text-shadow 0.3s ease, color 0.3s ease;
     font: 1.6rem sans-serif;
     text-shadow: 0 0 10px #fbfcfc, 0 0 20px #fbfcfc, 0 0 30px #fbfcfc, 0 0 40px #fbfcfc;
 }
+/*side conent*/
+.side231{
+    margin-top: 10vh;
+    margin-left: 210px;
+    height: auto;
+}
+/*Css for mainbox that is all post*/
 
+.mainbox2{
+    width: 95%;
+    height: auto;
+    padding: 10px;
+    box-shadow:  4px 4px 10px rgba(0, 0, 0, 0.3);
+    border-left: 1px solid black;
+    margin-bottom: 16px;
+    margin-left: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.mainbox2 h6,h5,p,button{
+    margin-bottom: 0;
+}
+
+.mainbox2 p{
+    text-align: right;
+}
+
+/* for profile photo*/
+.ma2n{
+    padding: 0;
+}
+.side12b{
+    margin-left:10% ;
+    align-items: center;
+    margin-top: 30px;
+}
+.side2profile{
+    background-color: aliceblue;
+    border-radius: 50%;
+    margin-left: 30%;
+    justify-content: center;
+    align-items: center;
+    width: 39vh;
+    height: 39vh;
+    border: 1px solid black;
+}
+.side2profile i{
+ font-size: 15rem ;
+ margin-left: 48px;
+ margin-top: 20px;
+}
+/* for name and follow button*/
+.side2profile12{
+    font-size: 2rem;
+    margin-left: 23%;
+    width: 60vh;
+    text-align: center;
+    font-family: monospace;
+    font-weight: bold;
+    color: #212f3d;
+    margin-top: 10px;
+}
+.fobut{
+    margin-left: 33%;
+    margin-top: 10px;
+    width: 30vh;
+    height: 40px;
+    padding-bottom: 10px;
+}
+.fo{
+    margin-top: 10px;
+    margin-left: 28%;
+    margin-bottom: 20px;
+}
+.fo div{
+    display: inline;
+    font-size: 1.7rem;
+}
+.fo1,.fo2{
+    color: #212f3d;
+margin-right: 70px;
+}
+/*Login and register */
+.loreg{
+    padding: 20px;
+    margin-left: 25%;
+    margin-top: 15%;
+    border: 1px solid rgb(19, 179, 228);
+    height: auto;
+    width: 600px;
+    border-radius: 10px;
+    background-color: #85c1e9;
+}
+.loreg input[type="text"],input[type="password"],input[type="email"]{
+    background-color: #aaaeb3;
+}
+.loreg h2{
+    text-align: center;
+    margin-bottom: 20px;
+}

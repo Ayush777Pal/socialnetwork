@@ -1,7 +1,7 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-
+<div class="loreg">
     <h2>Login</h2>
 
     {% if message %}
@@ -16,9 +16,12 @@
         <div class="form-group">
             <input class="form-control" type="password" name="password" placeholder="Password">
         </div>
-        <input class="btn btn-primary" type="submit" value="Login">
+        Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+
+        <input class="btn btn-primary fobut" type="submit" value="Login">
     </form>
 
-    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
-
+  
+</div>
+  
 {% endblock %}

@@ -18,8 +18,8 @@ def remove_like(request, post_id):
 def add_like(request, post_id):
     post =Post.objects.get(pk=post_id)
     user = User.objects.get(pk=request.user.id)
-    newLike = Like.objects.filter(user=user, post=post)
-    newLike.save()
+    like = Like.objects.filter(user=user, post=post)
+    like.save()
     return JsonResponse({"message":"Like added!"})
     
 
@@ -37,7 +37,7 @@ def index(request):
     whoYouLiked =[]
     try:
         for like in allLikes:
-            if like.user.id ==request.user.id:
+            if like.user.id == request.user.id:
                 whoYouLiked.append(like.post.id)
     except:
         whoYouLiked = []
@@ -65,13 +65,13 @@ def profile(request,user_id):
 
 
     # Pagination
-    paginator = Paginator(allPosts, 1)
+    paginator = Paginator(allPosts, 2)
     page_number = request.GET.get('page')
     posts_of_the_page = paginator.get_page(page_number)
 
     return render(request, "network/profile.html",{
         "posts_of_the_page":posts_of_the_page ,
-        "username":user.username,
+        "username":user.username.title(),
         "following":following,
         "followers":followers,
         "isFollowing":isFollowing,
@@ -94,7 +94,7 @@ def follow(request):
     userfollow = request.POST['userfollow']
     currentUser = User.objects.get(pk=request.user.id)
     userfollowData=User.objects.get(username=userfollow)
-    f=Follow(user=currentUser, userfollower=userfollowData)
+    f=Follow(user=currentUser, user_follower=userfollowData)
     f.save()
     user_id = userfollowData.id
     return HttpResponseRedirect(reverse(profile,kwargs={'user_id':user_id}))
@@ -102,11 +102,19 @@ def follow(request):
 def unfollow(request):
     userfollow = request.POST['userfollow']
     currentUser = User.objects.get(pk=request.user.id)
-    userfollowData=User.objects.get(username=userfollow)
-    f=Follow(user=currentUser, userfollower=userfollowData)
-    f.delete()
+    userfollowData = User.objects.get(username=userfollow)
+    
+    # Retrieve the Follow object from the database
+    try:
+        f = Follow.objects.get(user=currentUser, user_follower=userfollowData)
+        f.delete()  # This deletes the retrieved object
+    except Follow.DoesNotExist:
+        # Handle the case where the Follow object doesn't exist
+        return HttpResponse("Follow relationship does not exist", status=404)
+    
     user_id = userfollowData.id
-    return HttpResponseRedirect(reverse(profile,kwargs={'user_id':user_id}))
+    return HttpResponseRedirect(reverse('profile', kwargs={'user_id': user_id}))
+
 
 
 def login_view(request):
