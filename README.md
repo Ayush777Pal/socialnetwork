@@ -43,8 +43,4 @@ This page makes the user to create new account
 
 ![image](https://github.com/user-attachments/assets/e1808843-2d28-4abf-8980-b51e8ce7c845)
 
-![image](https://github.com/user-attachments/assets/11b85005-e1d7-4e3c-874d-f10c87908d61)
-
-![image](https://github.com/user-attachments/assets/18ad0982-ecc3-4178-9575-9613ac114fe5)
-
 Code distribution by Harvard university:-https://cs50.harvard.edu/web/2020/projects/4/network/
