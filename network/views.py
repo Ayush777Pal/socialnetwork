@@ -9,43 +9,43 @@ import json
 from django.http import JsonResponse
 
 def remove_like(request, post_id):
-    post =Post.objects.get(pk=post_id)
-    user = User.objects.get(pk=request.user.id)
-    like = Like.objects.filter(user=user, post=post)
-    like.delete()
-    return JsonResponse({"message":"Like removed!"})
+    post = Post.objects.get(pk=post_id)
+    user = request.user
+    Like.objects.filter(user=user, post=post).delete()
+    return JsonResponse({"message": "Like removed!"})
+
 
 def add_like(request, post_id):
-    post =Post.objects.get(pk=post_id)
-    user = User.objects.get(pk=request.user.id)
-    like = Like.objects.filter(user=user, post=post)
-    like.save()
-    return JsonResponse({"message":"Like added!"})
-    
+    post = Post.objects.get(pk=post_id)
+    user = request.user
 
+    # Prevent duplicate likes (optional safeguard)
+    if not Like.objects.filter(user=user, post=post).exists():
+        Like.objects.create(user=user, post=post)
+        return JsonResponse({"message": "Like added!"})
+    else:
+        return JsonResponse({"message": "Already liked."})
 
 def index(request):
-    allPosts = Post.objects.all().order_by("id").reverse()
+    allPosts = Post.objects.all().order_by("-id")  # Keep latest first
 
     # Pagination
     paginator = Paginator(allPosts, 5)
     page_number = request.GET.get('page')
     posts_of_the_page = paginator.get_page(page_number)
 
-    allLikes = Like.objects.all()
+    # Get likes for current user only, more efficient
+    whoYouLiked = []
+    if request.user.is_authenticated:
+        whoYouLiked = list(
+            Like.objects.filter(user=request.user)
+            .values_list('post__id', flat=True)
+        )
 
-    whoYouLiked =[]
-    try:
-        for like in allLikes:
-            if like.user.id == request.user.id:
-                whoYouLiked.append(like.post.id)
-    except:
-        whoYouLiked = []
-
-    return render(request, "network/index.html",{
-        "posts_of_the_page":posts_of_the_page,
-        "whoYouLiked":whoYouLiked     
-        })
+    return render(request, "network/index.html", {
+        "posts_of_the_page": posts_of_the_page,
+        "whoYouLiked": whoYouLiked
+    })
 
 def profile(request,user_id):
     user=User.objects.get(pk=user_id)
@@ -65,7 +65,7 @@ def profile(request,user_id):
 
 
     # Pagination
-    paginator = Paginator(allPosts, 2)
+    paginator = Paginator(allPosts, 3)
     page_number = request.GET.get('page')
     posts_of_the_page = paginator.get_page(page_number)
 
@@ -181,7 +181,7 @@ def following(request):
                 followingPosts.append(post)
 
     # Pagination
-    paginator = Paginator(followingPosts, 1)
+    paginator = Paginator(followingPosts, 3)
     page_number = request.GET.get('page')
     posts_of_the_page = paginator.get_page(page_number)
 

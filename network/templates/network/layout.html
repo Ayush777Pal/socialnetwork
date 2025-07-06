@@ -12,38 +12,38 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="{% static 'network/styles.css' %}" rel="stylesheet">
     </head>
-    <body>
-        <div class="ma1n">
-            <div class="side12a">
-                <div class="sideprofile">
-                   <div class="profile"><i class="fa-solid fa-user-secret"></i></div> 
-                   {% if user.is_authenticated %}
-                       <a href="{% url 'profile' user.id%}" style="text-decoration: none; color: white;"><strong>{{ user.username }}</strong></a>
-                   {% else %}
-                   Register first
-               {% endif %}
-                </div>
-                <div class="sidehead">Network</div>
-            </div>
-            <div class="side123">
-                <ul class="sideul">
-                    <li class="sideli"><a  href="{% url 'index' %}">All Posts</a></li>
+<body>
+    <div>
+        <div>
+            <div class="navbar">
+                <div class="user-info">
                     {% if user.is_authenticated %}
-                    <li class="sideli"><a  href="{% url 'createPost'%}">Create Post</a></li>
-                    <li class="sideli"><a href="{% url 'following'%}">Following</a></li>
-                    <li class="sideli"><a href="{% url 'logout' %}">Log Out</a></li>
+                        <a href="{% url 'profile' user.id %}"><strong>{{ user.username }}</strong></a>
                     {% else %}
-                    <li class="sideli"><a href="{% url 'login' %}">Log In</a></li>
-                    <li class="sideli"><a href="{% url 'register' %}">Register</a></li>
+                        Register first
+                    {% endif %}
+                </div>
+                <div class="site-title">Network</div>
+                <ul class="nav-links">
+                    <li><a href="{% url 'index' %}">All Posts</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'createPost' %}">Create Post</a></li>
+                        <li><a href="{% url 'following' %}">Following</a></li>
+                        <li><a href="{% url 'logout' %}">Log Out</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Log In</a></li>
+                        <li><a href="{% url 'register' %}">Register</a></li>
                     {% endif %}
                 </ul>
             </div>
-            <div class="side231">
-                <div class="body">
+
+            <div>
+                <div>
                     {% block body %}
                     {% endblock %}
-                </div>            </div>
+                </div>
+            </div>
         </div>
-
-    </body>
+    </div>
+</body>
 </html>
