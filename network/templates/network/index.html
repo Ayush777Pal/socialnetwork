@@ -8,21 +8,39 @@
     if(parts.length == 2) return parts.pop().split(';').shift();
   }
 
-  function submitHandler(id){
-    const textareaValue = document.getElementById(`textarea_${id}`).value;
-    const content = document.getElementById(`content_${id}`);
-    const modal = document.getElementById(`modal_edit_post_${id}`);
-    fetch(`/edit/${id}`, {
-      method: "POST",
-      headers: {"Content-type": "application/json", "X-CSRFToken": getCookie("csrftoken")},
-      body: JSON.stringify({ content: textareaValue })
-    })
-    .then(response => response.json())
-    .then(result => {
-      content.innerHTML = result.data;
-      modal.style.display = "none";
-    });
+function openModal(id) {
+  document.getElementById(`modal_edit_post_${id}`).style.display = "flex";
+}
+
+function closeModal(id) {
+  document.getElementById(`modal_edit_post_${id}`).style.display = "none";
+}
+
+function submitHandler(id) {
+  const textarea = document.getElementById(`textarea_${id}`);
+  const newContent = textarea.value.trim();
+  const contentDiv = document.getElementById(`content_${id}`);
+  const modal = document.getElementById(`modal_edit_post_${id}`);
+
+  if (newContent === "") {
+    alert("Post content cannot be empty!");
+    return;
   }
+
+  fetch(`/edit/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      "X-CSRFToken": getCookie("csrftoken")
+    },
+    body: JSON.stringify({ content: newContent })
+  })
+  .then(response => response.json())
+  .then(result => {
+    contentDiv.innerHTML = result.data;
+    modal.style.display = "none";
+  });
+}
 
 function likeHandler(button) {
   const postId = button.dataset.postId;
@@ -64,19 +82,20 @@ function likeHandler(button) {
       {% if user.is_authenticated %}
         {% if user == post.user %}
           <div class="post-actions">
-            <button onclick="document.getElementById('modal_edit_post_{{post.id}}').style.display='block'">Edit</button>
+            <button class="edit-btn" onclick="openModal('{{post.id}}')">✏️ Edit</button>
           </div>
 
-          <div class="modal" id="modal_edit_post_{{post.id}}" style="display: none;">
+          <div class="modal-overlay" id="modal_edit_post_{{post.id}}" style="display: none;">
             <div class="modal-box">
-              <h4>Edit Post</h4>
-              <textarea id="textarea_{{ post.id }}" rows="4">{{ post.content }}</textarea>
+              <h3>Edit Your Post</h3>
+              <textarea id="textarea_{{ post.id }}" rows="4" cols="53">{{ post.content }}</textarea>
               <div class="modal-actions">
-                <button onclick="submitHandler('{{post.id}}')">Save</button>
-                <button onclick="document.getElementById('modal_edit_post_{{post.id}}').style.display='none'">Cancel</button>
+                <button class="save-btn" onclick="submitHandler('{{post.id}}')">💾 Save</button>
+                <button class="cancel-btn" onclick="closeModal('{{post.id}}')">❌ Cancel</button>
               </div>
             </div>
           </div>
+
         {% else %}
         <div class="post-actions">
           <button

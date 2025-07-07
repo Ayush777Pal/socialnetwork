@@ -2,49 +2,72 @@
 
 {% block body %}
 <div class="profile-container">
+
+  <!-- Profile Header with Picture and Name -->
   <div class="profile-header">
-    <i>👤</i>
-    <h2>{{ username }}</h2>
+    <img src="{{ profile_image|default:'/static/images/default-profile.png' }}" class="profile-pic" alt="{{ username }}'s Profile Picture">
+    <div class="profile-info">
+      <h2>{{ username }}</h2>
+      <p><strong>{{ followers.count }}</strong> Followers | <strong>{{ following.count }}</strong> Following</p>
+    </div>
   </div>
 
+  <!-- Upload Form (Visible only to current user) -->
+  {% if request.user == user_profile %}
+    <form method="POST" enctype="multipart/form-data" class="upload-form">
+      {% csrf_token %}
+      <label for="profile_image" class="upload-label">Update Profile Photo:</label>
+      <input type="file" name="profile_image" id="profile_image" accept="image/*" required>
+      <button type="submit" class="upload-btn">Upload</button>
+    </form>
+  {% endif %}
+
+  <!-- Follow/Unfollow Section (For other users) -->
   {% if user.is_authenticated and user != user_profile %}
     <div class="profile-follow">
       {% if isFollowing %}
         <form action="{% url 'unfollow' %}" method="post">
           {% csrf_token %}
           <input type="hidden" name="userfollow" value="{{ user_profile }}">
-          <button type="submit">Unfollow</button>
+          <button type="submit" class="unfollow-btn">Unfollow</button>
         </form>
       {% else %}
         <form action="{% url 'follow' %}" method="post">
           {% csrf_token %}
           <input type="hidden" name="userfollow" value="{{ user_profile }}">
-          <button type="submit">Follow</button>
+          <button type="submit" class="follow-btn">Follow</button>
         </form>
       {% endif %}
     </div>
   {% endif %}
 
-  <div class="profile-stats">
-    <div>Followers: {{ followers.count }}</div>
-    <div>Following: {{ following.count }}</div>
-  </div>
 </div>
 
+<!-- Posts Section -->
 {% for post in posts_of_the_page %}
   <div class="post-card">
     <h4><a href="{% url 'profile' user_id=post.user.id %}">@{{ post.user }}</a></h4>
     <p>{{ post.content }}</p>
     <small>{{ post.date }}</small>
   </div>
+{% empty %}
+  <p class="no-posts">No posts yet.</p>
 {% endfor %}
 
+<!-- Pagination -->
+
 <div class="pagination">
-  {% if posts_of_the_page.has_previous %}
-    <a href="?page={{ posts_of_the_page.previous_page_number }}">Previous</a>
-  {% endif %}
-  {% if posts_of_the_page.has_next %}
-    <a href="?page={{ posts_of_the_page.next_page_number }}">Next</a>
-  {% endif %}
+  <ul class="pagination-list">
+    {% if posts_of_the_page.has_previous %}
+      <li><a class="pagination-btn" href="?page={{ posts_of_the_page.previous_page_number }}">⟨ Previous</a></li>
+    {% endif %}
+
+    <li class="current-page">Page {{ posts_of_the_page.number }} of {{ posts_of_the_page.paginator.num_pages }}</li>
+
+    {% if posts_of_the_page.has_next %}
+      <li><a class="pagination-btn" href="?page={{ posts_of_the_page.next_page_number }}">Next ⟩</a></li>
+    {% endif %}
+  </ul>
 </div>
+
 {% endblock %}

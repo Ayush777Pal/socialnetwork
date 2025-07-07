@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.core.paginator import Paginator
 from .models import *
@@ -47,36 +47,44 @@ def index(request):
         "whoYouLiked": whoYouLiked
     })
 
-def profile(request,user_id):
-    user=User.objects.get(pk=user_id)
-    allPosts = Post.objects.filter(user=user).order_by("id").reverse()
+
+def profile(request, user_id):
+    user = User.objects.get(pk=user_id)
+    allPosts = Post.objects.filter(user=user).order_by("-id")
+
+    if not hasattr(user, 'profile'):
+        Profile.objects.create(user=user)
+
+    if request.method == 'POST' and request.user == user:
+        uploaded_image = request.FILES.get("profile_image")
+        if uploaded_image:
+            user.profile.image = uploaded_image
+            user.profile.save()
+            return redirect('profile', user_id=user.id)
 
     following = Follow.objects.filter(user=user)
-    followers=Follow.objects.filter(user_follower=user)
+    followers = Follow.objects.filter(user_follower=user)
 
     try:
-        checkFollow = followers.filter(user=User.objects.get(pk=request.user.id))
-        if len(checkFollow)!=0:
-            isFollowing=True
-        else:
-            isFollowing=False
+        checkFollow = followers.filter(user=request.user)
+        isFollowing = checkFollow.exists()
     except:
         isFollowing = False
 
-
-    # Pagination
+    # ✅ Pagination
     paginator = Paginator(allPosts, 3)
     page_number = request.GET.get('page')
     posts_of_the_page = paginator.get_page(page_number)
 
-    return render(request, "network/profile.html",{
-        "posts_of_the_page":posts_of_the_page ,
-        "username":user.username.title(),
-        "following":following,
-        "followers":followers,
-        "isFollowing":isFollowing,
-        "user_profile":user  
-        })
+    return render(request, "network/profile.html", {
+        "posts_of_the_page": posts_of_the_page,
+        "username": user.username.title(),
+        "following": following,
+        "followers": followers,
+        "isFollowing": isFollowing,
+        "user_profile": user,
+        "profile_image": user.profile.image.url if user.profile.image else None
+    })
 
 def createPost(request):
     return render(request,"network/createPost.html")
@@ -123,6 +131,7 @@ def login_view(request):
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
+        print(username+" "+password)
         user = authenticate(request, username=username, password=password)
 
         # Check if authentication successful
