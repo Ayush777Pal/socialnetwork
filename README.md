@@ -1,9 +1,12 @@
+# Visit the Site Here 
+->https://ayush7171.pythonanywhere.com/
 # Network
 The implementation of a social network that allows users to make posts, follow other users, and “like” posts using Python framework Django, JavaScript, HTML, and CSS.This web application consist of different section such as create post, view all post, user profile, follow page, log in and log out page.
 ## All Post
 Default page of web app is all post page this page shows the post made by all user that consist of like and dislike button and edit button for current user. When ever user clicks on edit button a pop up box will come along with edit option in the page when clicked on save changes it will change the content inside the post of current login user. Each post consist of its creater name on clicking on user name it will take to user Profile Page
 
-![image](https://github.com/user-attachments/assets/0fd6fff1-596d-4874-9d7e-e9c38b860398)
+<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/f17b2f79-b26b-4b76-87b6-aa15023fdae4" />
+
 
 ### after clicking on user name inside post
 
