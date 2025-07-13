@@ -5,46 +5,52 @@ The implementation of a social network that allows users to make posts, follow o
 ## All Post
 Default page of web app is all post page this page shows the post made by all user that consist of like and dislike button and edit button for current user. When ever user clicks on edit button a pop up box will come along with edit option in the page when clicked on save changes it will change the content inside the post of current login user. Each post consist of its creater name on clicking on user name it will take to user Profile Page
 
-<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/f17b2f79-b26b-4b76-87b6-aa15023fdae4" />
+<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/ed1a05a7-e6ab-4e63-96fa-4052ef03c128" />
 
 
 ### after clicking on user name inside post
 
-![image](https://github.com/user-attachments/assets/491b3423-dd9e-4737-aa0c-d75f0927e841)
+<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/fe2dec1c-7252-4ba1-8de6-eef7e8474285" />
+
 ## Profile page
 On clicking of user name in post it will take us to user profile page where we can see the information of user such as its all posts , its followers, its following, and a center icon just to look good(further modification can be done even to add image by applying Django image field)
 
-![image](https://github.com/user-attachments/assets/b3d0ec29-5c88-4f94-a69f-97477f00e0ff)
+<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/98d4f10c-c751-4a3a-a96b-7b91f402946c" />
+
 ## Follow Page
 This page consist of all post by the other user that had been followed by the current user.
 
-![image](https://github.com/user-attachments/assets/9fa69db7-55ac-42fb-a6e4-01c1065f0836)
+<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/70af7bc9-5f33-47a4-b78c-df8163847a06" />
 
 ## Create Post 
 This post consist of a textbox form and a submit button that allows current user to post something on website
 
-![image](https://github.com/user-attachments/assets/a518f141-a243-482c-ab16-c0966113348c)
+<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/3ba797dd-a3a5-48c0-bbd2-b609b9f6c949" />
 
 ## Login Page 
 This page makes user to login into its own account
 
-![image](https://github.com/user-attachments/assets/7e8c5289-9f13-4b13-a654-38f441486bb2)
+<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/a34624d3-9a6b-4fb6-8368-77bf6e857316" />
+
 ## Register Page
 This page makes the user to create new account
 
-![image](https://github.com/user-attachments/assets/3018d679-e9f8-410f-aa1b-febc622f73c4)
+<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/b66e402e-bc8d-456a-99d7-20b3b378c6eb" />
+
 ## Note
 1)Webiste also shows pagination that is user that move to next post and even can go back to previous post 
 
-![pag](https://github.com/user-attachments/assets/731591ea-1cb5-4465-9888-6019a35bc873)
+<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/becc4f9d-d9f6-4fe7-8bf3-13cbcfe58d77" />
+
 2)When the current user checks the profile of other user then he/she has option to choose to follow or unfollow other users
 
-![Untitled](https://github.com/user-attachments/assets/81a3a25e-1b4f-4218-a5e0-128dc68a6e42)
+<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/1fbdcb0c-daa9-47de-aa8d-a4561391bedb" />
 
-![hu](https://github.com/user-attachments/assets/e79f6cd4-530e-4c28-8bdf-3d13f1dc25f8)
+<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/5c9e60be-09d2-4d3f-b61e-e30dd21048cc" />
+
 3)When the user has not logged in to the website the he can only see the all post, profile page, login and register page
 
-![image](https://github.com/user-attachments/assets/e1808843-2d28-4abf-8980-b51e8ce7c845)
+<img width="1360" height="768" alt="image" src="https://github.com/user-attachments/assets/9c40fb78-3611-4182-a8ae-b99ec8b618db" />
 
 ## Database info
 The backend data base is show in form of django development server that consist of different django model that is use to store information. These data models name include Followers,Like,Post, user
